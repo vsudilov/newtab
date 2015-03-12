@@ -118,8 +118,4 @@ define(['angularAMD'], function (angularAMD) {
 			$scope.clock = moment().format('HH:mm');
 		}, 1000);
 	});
-<<<<<<< HEAD
 });
-=======
-});
->>>>>>> dcc7fd28ed02591e59eecd9ec66ed5a5935befcd
