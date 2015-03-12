@@ -73,7 +73,7 @@ define(['angularAMD'], function (angularAMD) {
 	    if (typeof storageFilesHour === "undefined" || storageFilesHour < currentHour) {
             storageFiles.hour = currentHour;
             
-			$http.get('http://api.openweathermap.org/data/2.5/weather?q=Boston&lang=fi')
+			$http.get('http://api.openweathermap.org/data/2.5/weather?q=Boston')
 				.success(function(data, status, headers, config) {
 					var temp = Math.round(parseInt(data.main.temp) - 273.15, 2) + "°C";
 					storageFiles.temp = temp;
