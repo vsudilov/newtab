@@ -1,23 +1,41 @@
-define(['angularAMD', 'angular-route', 'moment', 'controllers'], function (angularAMD) {
-	moment.locale('en');
-    var app = angular.module("newtab", ['ngRoute', 'controllers']);
-    app.config(['$routeProvider', function($routeProvider) {
+define(['angularAMD', 'angular-route', 'angular-cookies', 'angular-sanitize', 'angular-localization', 'storage', 'controllers'], function (angularAMD) {
+
+    var app = angular.module("newtab", ['ngRoute', 'ngLocalize', 'ngLocalize.Config', 'ngLocalize.InstalledLanguages', 'services', 'controllers']);
+    app.config(function($routeProvider) {
+
     	$routeProvider.
-    	when('/', {
-    		templateUrl : 'js/scripts/view/dashboard.html',
-    		controller : 'DashboardCtrl'
-    	}).
-    	otherwise({
-    		redirectTo : '/'
-    	});
-    }]);
+        	when('/', {
+        		templateUrl : 'js/scripts/view/dashboard.html',
+        		controller : 'DashboardCtrl'
+        	}).
+        	otherwise({
+        		redirectTo : '/'
+        	});
+    })
+    .value('localeConf', {
+        basePath: 'languages',
+        defaultLocale: 'en-US',
+        sharedDictionary: 'time',
+        fileExtension: '.lang.json',
+        persistSelection: true,
+        cookieName: 'COOKIE_LOCALE_LANG',
+        observableAttrs: new RegExp('^data-(?!ng-|i18n)'),
+        delimiter: '::'
+    })
+    .value('localeSupported', [
+        'en-US',
+        'fi-FI',
+        'zh-TW'
+    ])
+    .value('localeFallbacks', {
+        'en': 'en-US',
+        'fi': 'fi-FI',
+        'zh': 'zh-TW'
+    });
 
     var cssPaths = [
     	"css/normalize.min.css",
-    	"css/app.css",
-    	"css/fonts.css",
-    	"css/typography.css",
-    	"css/font-awesome.min.css"
+    	"css/all.min.css"
     ]
 
     angular.forEach(cssPaths, function(value) {
